@@ -1,3 +1,4 @@
+import codecs
 from fastapi import FastAPI, File, UploadFile
 from fastapi.responses import StreamingResponse
 from PIL import Image
@@ -118,26 +119,24 @@ async def video_test(original_video:  List[UploadFile] = File(description="Origi
         videoWriter.write(frame)
     cap.release()
     videoWriter.release()
+    
     def iterfile():  # 
         output_video_path = './results/result_video.mp4'
-        with open(output_video_path, mode="rb") as file_like:  # 
+        output_video_path2 = './results/result_video2.mp4'
+        os.system(f"ffmpeg -i  {output_video_path} -vcodec libx264 -y {output_video_path2}")
+        with open(output_video_path2, mode="rb") as file_like:  # 
             yield from file_like  #     
     
     # return video object
     return StreamingResponse(iterfile(), media_type='video/mp4')
 
-
-# if __name__ == '__main__':
-
-#     parser = argparse.ArgumentParser(description="MobileFaceSwap Test")
-
-#     parser = argparse.ArgumentParser(description="MobileFaceSwap Test")
-#     parser.add_argument('--source_img_path', type=str, help='path to the source image')
-#     parser.add_argument('--target_video_path', type=str, help='path to the target video')
-#     parser.add_argument('--output_path', type=str, default='results', help='path to the output videos')
-#     parser.add_argument('--image_size', type=int, default=224,help='size of the test images (224 SimSwap | 256 FaceShifter)')
-#     parser.add_argument('--merge_result', type=bool, default=True, help='output with whole image')
-#     parser.add_argument('--use_gpu', type=bool, default=False)
-
-#     args = parser.parse_args()
-#     video_test(args)
+@app.get('/api/get-result/') 
+async def give_move():
+    def iterfile():  # 
+        output_video_path = './results/result_video2.mp4'
+        with open(output_video_path, mode="rb") as file_like:  # 
+            
+            yield from file_like  #     
+    
+    # return video object
+    return StreamingResponse(iterfile(), media_type='video/mp4')
