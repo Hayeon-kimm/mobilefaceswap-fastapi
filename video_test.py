@@ -91,7 +91,7 @@ async def video_test(original_video:  List[UploadFile] = File(description="Origi
     #확인용
     cv2.imwrite("./mask/tune_mask.png", tune_mask)
     
-    fourcc = cv2.VideoWriter_fourcc(*'mp4v')
+    fourcc = cv2.VideoWriter_fourcc(*'H264')
     cap = cv2.VideoCapture()
     cap.open(target_video_path)
     videoWriter = cv2.VideoWriter("results/result_video.mp4", fourcc, int(cap.get(cv2.CAP_PROP_FPS)), (int(cap.get(cv2.CAP_PROP_FRAME_WIDTH)),int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))))
