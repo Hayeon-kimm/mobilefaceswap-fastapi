@@ -1,7 +1,7 @@
 ## [LAIT2 server]
 *  주로 사용할 파일은 video_test.py 입니다.
 * 이미지명:태그는 제가 paddle 이란 이름으로 이미지를 주었기 때문에 paddle일 거에요! 정확하 이름명으 알고 싶으며 이미지르 다 설치하 후 docker images 명령어로 이미지 및 컨테이너 이름을 확인하세요!
-1. 도커 컨테이너 실행하기<br/>
+1. 도커 컨테이너 실행하기(PWD이므로 미리 mobilefaceswap-fastapi 디렉토리에서 이 명령어를 실행하세요! 그래야 이 폴더와 volume 연결이 됩니다)<br/>
 ~~~
 nvidia-docker run --name [컨테이너 지정할 이름] -p 8000:8000/tcp -it -v $PWD:/paddle [이미지명]:[태그]  /bin/bash
 ~~~
