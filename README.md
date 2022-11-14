@@ -1,15 +1,23 @@
 ## [LAIT2 server]
+*  주로 사용할 파일은 video_test.py 입니다.
+* 이미지명:태그는 제가 paddle 이란 이름으로 이미지를 주었기 때문에 paddle일 거에요! 정확하 이름명으 알고 싶으며 이미지르 다 설치하 후 docker images 명령어로 이미지 및 컨테이너 이름을 확인하세요!
 1. 도커 컨테이너 실행하기<br/>
 ~~~
-nvidia-docker run --name [이름] -p 8000:8000/tcp -it -v $PWD:/paddle paddlepaddle/paddle:2.3.2-gpu-cuda11.2-cudnn8  /bin/bash
+nvidia-docker run --name [컨테이너 지정할 이름] -p 8000:8000/tcp -it -v $PWD:/paddle [이미지명]:[태그]  /bin/bash
 ~~~
-2. 컨테이너에서 추가 모듈 설치<br/>
+2. 컨테이너에서 추가 모듈 설치(이미지 자체를 전달했기 때문에 모두 있을거에요 -> fastapi --version으로 확인해보세용! 존재한다면 이 과정은 생략하세요)<br/>
 ~~~
-pip install fastapi opencv-python insightface==0.2.1 onnxruntime pillow
+pip install fastapi opencv-python insightface==0.2.1 onnxruntime pillow uvicorn
 ~~~
-3. git-hub repository "model-serve-frontend"에서 프론트 서버 실행하기(https://github.com/SGM-StyleTransfer/model-serve-frontend
-4. `uvicorn --host=0.0.0.0 --port 8000 video_test:app`으로 실행하기
+3. 컨테이너에서 codec 변환 패키지르 설치하기
+~~~
+apt-get update
+apt-get install ffmpeg x264 libx264-dev
+~~~
+4. git-hub repository "model-serve-frontend"에서 프론트 서버 실행하기(https://github.com/SGM-StyleTransfer/model-serve-frontend)
+5. 기존 도커 컨테이너에서 `uvicorn --host=0.0.0.0 --port 8000 video_test:app`으로 실행하기
+
 <br/><br/>
-## [docs로 test 버전]
+## [docs로 test 버전] -> 안하셔도 됩니다 !
 1,2 동일, 3 생략 후 4로 접속 <br/>
 이후 URL 마지막에 /docs를 입력하여 비디오, 이미지 입력 -> results에서 "result_video.mp4"로 실행결과 확인 가능
