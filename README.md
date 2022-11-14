@@ -9,10 +9,11 @@ nvidia-docker run --name [컨테이너 지정할 이름] -p 8000:8000/tcp -it -v
 ~~~
 pip install fastapi opencv-python insightface==0.2.1 onnxruntime pillow uvicorn
 ~~~
-3. 컨테이너에서 codec 변환 패키지르 설치하기
+3. 컨테이너에서 codec 변환 패키지르 설치하기 + results(결과저장), data(input저장) 폴더 생성
 ~~~
 apt-get update
 apt-get install ffmpeg x264 libx264-dev
+mkdir data results
 ~~~
 4. git-hub repository "model-serve-frontend"에서 프론트 서버 실행하기(https://github.com/SGM-StyleTransfer/model-serve-frontend)
 5. 기존 도커 컨테이너에서 `uvicorn --host=0.0.0.0 --port 8000 video_test:app`으로 실행하기
