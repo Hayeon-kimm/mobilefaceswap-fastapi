@@ -15,7 +15,7 @@ apt-get update
 apt-get install ffmpeg x264 libx264-dev
 mkdir data results
 ~~~
-4. git-hub repository "model-serve-frontend"에서 프론트 서버 실행하기(https://github.com/SGM-StyleTransfer/model-serve-frontend)
+4. git-hub repository "model-serve-frontend"에서 프론트 서버 실행하기(https://github.com/Hayeon-kimm/model-serve-frontend)
 5. 기존 도커 컨테이너에서 paddle 폴더로 들어가서 `uvicorn --host=0.0.0.0 --port 8000 video_test:app`으로 실행하기
 ~~~
 cd ..
